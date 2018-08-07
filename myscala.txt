@@ -1,1 +1,2 @@
 printn("ola")
+println("scala pgm"
