@@ -1,0 +1,10 @@
+def m(l:List[Int]):List[Int]= l match {
+  
+  case p::tail => p*20 :: m(tail)
+  case Nil => Nil
+}
+
+
+val list=List(1)
+
+println(m(list));
