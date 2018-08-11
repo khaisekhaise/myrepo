@@ -1,0 +1,33 @@
+import fiddle.Fiddle, Fiddle.println
+import scalajs.js
+// List encoding
+@js.annotation.JSExportTopLevel("ScalaFiddle")
+object ScalaFiddle {
+  // $FiddleStart
+  // Start writing your ScalaFiddle code here
+  
+  val l=List(1,2,2,2,2,4,5,5,5,5)
+  def mOuter(listx:List[Int]):List[List[Int]]= {
+    def m(list:List[Int],lol:List[List[Int]]=List()):List[List[Int]]= list match {
+    
+    case Nil => lol
+    case p::Nil => lol
+    case p::tail if(lol.isEmpty || p!=lol.last.head) => m(tail,lol:::List(List(p)))
+    case p::tail => m(tail,lol.init:::List(lol.last:::List(p)))
+    }
+    m(l,List())
+  }
+  // println(m(l))
+  println(mOuter(l))
+  
+  def m2(list:List[Int]):List[(Int,Int)]= {
+    var lol:List[List[Int]]=mOuter(list);
+    def m3(lolt:List[List[Int]]):List[(Int,Int)]= lolt match {
+      case Nil =>Nil
+      case p::tail=>(p.head,p.length)::m3(tail)
+     }
+     m3(lol)
+  // $FiddleEnd
+  }
+  println(m2(l))
+}
