@@ -1,0 +1,12 @@
+//SCALA pack duplicates in list 
+val l=List(1,2,2,2,2,4,5,5,5,5)
+
+def m(list:List[Int],lol:List[List[Int]]=List()):List[List[Int]]= list match {
+  
+  case Nil => lol
+  case p::Nil => lol
+  case p::tail if(lol.isEmpty || p!=lol.last.head) => m(tail,lol:::List(List(p)))
+  case p::tail => m(tail,lol.init:::List(lol.last:::List(p)))
+}
+
+println(m(l))
